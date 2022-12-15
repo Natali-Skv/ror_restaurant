@@ -1,0 +1,65 @@
+<link
+  href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+  rel="stylesheet"
+>
+<script
+  src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"
+></script>
+<div class="container fixed-top bclr-light-grey">
+  <header
+    class="
+      d-flex
+      flex-wrap
+      justify-content-center
+      py-2
+      mb-4
+      border-bottom
+      align-items-center
+    "
+  >
+    <a
+      href="/"
+      class="
+        d-flex
+        align-items-center
+        mb-3
+        mb-md-0
+        me-md-auto
+        text-dark
+        text-decoration-none
+      "
+    >
+      <img class="me-5 mb-md-0" src="/imgs/logo.svg" alt="На главную" height="85">
+      <img class="me-1" src="/imgs/location.svg" height="40">
+      <span class="h5 clr-grey mb-0">Москва</span>
+    </a>
+
+    <ul class="nav nav-pills">
+      <%# TODO добавить хелпер, чтобы менять надпись "профиль" на "войти" для неавторизованных пользователей %>
+      <li class="nav-item"><a href="#" class="h4 link mx-5">Профиль</a></li>
+    </ul>
+    <div
+      class="btn-group h-75"
+      role="group"
+      aria-label="Vertical radio toggle button group"
+    >
+      <input
+        type="radio"
+        class="btn-check"
+        name="vbtn-radio"
+        id="vbtn-radio1"
+        autocomplete="off"
+        checked
+      >
+      <label class="btn btn-outline-base" for="vbtn-radio1">Ru</label>
+      <input
+        type="radio"
+        class="btn-check"
+        name="vbtn-radio"
+        id="vbtn-radio3"
+        autocomplete="off"
+      >
+      <label class="btn btn-outline-base" for="vbtn-radio3">En</label>
+    </div>
+  </header>
+</div>

@@ -1,0 +1,98 @@
+<%# Отображение главной страницы %>
+<%# справа корзина %>
+<%# слева меню %>
+<%# посередине блюда %>
+
+<div
+  class="
+    d-flex
+    flex-column
+    flex-shrink-0
+    py-3
+    position-fixed
+    align-items-center
+  "
+  id="menu-navbar"
+>
+  <p class=" d-flex mb-3 mb-md-0 text-decoration-none clr-grey h3 ">Меню
+  </p>
+  <hr>
+  <ul class="nav flex-column mb-auto w-100">
+    <% for i in 0..9 do %>
+      <li class="py-2 menu-link text-center">
+        <a href="#" class="h5 link ">
+          Dashboard
+        </a>
+      </li>
+    <% end %>
+  </ul>
+  <hr>
+</div>
+
+<div
+  class="
+    d-flex
+    flex-column
+    flex-shrink-0
+    position-fixed
+    w-25
+    overflow-auto
+    p-3
+    mb-3
+    mb-md-0
+    mr-md-3
+  "
+  id="cart"
+>
+  <p
+    class="
+      d-flex
+      align-items-center
+      mb-3
+      mb-md-0
+      me-md-auto
+      text-decoration-none
+      clr-grey
+      h3
+    "
+  >Корзина
+  </p>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <% for i in 0..9 do %>
+      <li>
+        <%# TODO в вашей корзине пока пусто %>
+        <div class="m-1 dish-in-cart">
+          <img class="ms-1 d-inline-block mb-3 cart-dish-img" src="/imgs/dish.webp">
+          <div class="ms-1 d-inline-block mb-3 align-top">
+            <p class="h5">Ролл запеченный тар-тар</p>
+            <div class="d-inline-block me-2 my-3">333 ккал</div>
+            <div class="d-inline-block my-2">500 г</div>
+            <div>
+                <button class="change-count-btn _btn-primary" type="submit">+</button>
+                <button class="change-count-btn _btn-primary" type="submit">-</button>
+            </div>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <hr>
+</div>
+
+<div class="position-absolute align-items-center" id="menu">
+
+  <% for i in 0..9 do %>
+    <div class="dish-cart d-inline-block my-3 mx-2 p-2 align-items-center">
+      <img class="mx-auto d-block mb-3 dish-img" src="/imgs/dish.webp">
+      <p class="h5">Ролл запеченный тар-тар</p>
+      <div class="d-inline-block me-3 my-3">333 ккал</div>
+      <div class="d-inline-block my-3">500 г</div>
+      <div class="dish-descr">Классические пельмени, обжаренные во фритюре. Состав: пшеничное тесто,
+        свинина, говядина, специи.
+      </div>
+      <div class="d-inline-block h6">1000$</div>
+      <button class="add-btn _btn-primary float-right" type="submit">Добавить</button>
+    </div>
+  <% end %>
+</div>
