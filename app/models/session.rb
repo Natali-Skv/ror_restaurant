@@ -11,7 +11,7 @@ class Session < ApplicationRecord
     INVALID_PHONE: 'invalid phone provided',
     INVALID_CODE: 'invalid code provided',
     WRONG_CODE: 'wrong auth code'
-  }
+  }.freeze
 
   class << self
     EMAIL = 'nat-s.skv%40yandex.ru'.freeze

@@ -13,42 +13,56 @@ Turbolinks.start()
 ActiveStorage.start()
 
 
-$(function () {
+$(document).on('turbolinks:load', function () {
         $(".menu-link>span").on('click', function (event) {
                 console.log(event.target.getAttribute("link"))
                 $('html, body').animate({
                         scrollTop: $(`#${event.target.getAttribute("link")}`).offset().top - 140
                 }, 5);
         });
-        $('#phone').on('keydown', function (e) {
-                inputphone(e, document.querySelector('#phone'))
+
+        if (document.getElementById('cart')) {
+                $.ajax({
+                        url: "menu/cart",
+                        context: document.body,
+                        success: function (xrs) {
+                                render_cart(xrs);
+                        }
+                });
+        }
+
+        $('form.button_to').on("ajax:success", function (xrs, data, status) {
+                render_cart(xrs.detail[0]);
         })
 });
 
-// на все кнопки "добавить в корзину вешается функция, которая либо отрисовывает модалку с логином, либо делает запрос на добавление товара в корзину"
-// $(function () {
-//         $(".add-btn").on('click',function () {
-//                 $("#login-modal").modal();
-//         });
-// });
 
+function render_cart(data) {
+        $('#cart').empty();
+        let cart = document.getElementById("cart");
+        let cartUl = document.createElement('ul');
+        cartUl.className = "nav nav-pills flex-column mb-auto"
+        cart.appendChild(cartUl)
 
-//-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --
-
-
-//Функция маски формат +7 (
-function inputphone(e, phone) {
-        function stop(evt) {
-                evt.preventDefault();
-        }
-        let key = e.key, v = phone.value; not = key.replace(/([0-9])/, 1)
-
-        if (not == 1 || 'Backspace' === not) {
-                if ('Backspace' != not) {
-                        if (v.length < 3 || v === '') { phone.value = '+7(' }
-                        if (v.length === 6) { phone.value = v + ')' }
-                        if (v.length === 10) { phone.value = v + '-' }
-                        if (v.length === 13) { phone.value = v + '-' }
-                }
-        } else { stop(e) }
+        data.dishes.forEach(function (dish) {
+                let dishLi = document.createElement('li')
+                dishLi.innerHTML = `
+                <div class="p-2 dish-in-cart">
+                        <img class="ms-1 d-inline-block mb-3 cart-dish-img" src="/dishes/${dish.image_path}">
+                                <div class="ms-1 d-inline-block mb-3 align-top">
+                                        <p class="h5">${dish.name}</p>
+                                        <div class="d-inline-block me-2 my-3">${dish.calories} ккал</div>
+                                        <div class="d-inline-block my-2">${dish.weight} г</div>
+                                <div>
+                                        <button class="upd-cart change-count-btn _btn-primary" type="submit">+</button>
+                                        <button class="upd-cart change-count-btn _btn-primary" type="submit">-</button>
+                                        <div class="d-inline ms-5 h5">${dish.price} ₽</div>
+                                </div>
+                        </div>
+                </div>
+                `
+                cartUl.appendChild(dishLi)
+        });
+        let totalElem = document.getElementById('total-price')
+        totalElem.innerText = data.total
 }

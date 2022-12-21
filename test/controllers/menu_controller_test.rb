@@ -1,8 +1,8 @@
 require "test_helper"
 
 class MenuControllerTest < ActionDispatch::IntegrationTest
-  test "should get get_menu" do
-    get menu_get_menu_url
+  test "should get menu" do
+    get menu_menu_url
     assert_response :success
   end
 
@@ -16,8 +16,8 @@ class MenuControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get get_cart" do
-    get menu_get_cart_url
+  test "should get cart" do
+    get menu_cart_url
     assert_response :success
   end
 end

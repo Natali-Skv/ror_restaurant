@@ -1,21 +1,31 @@
 class MenuController < ApplicationController
-  def get_menu
-    # @categories = Category.all.map(&:name)
+  before_action :require_login, only: [:add_dish]
+
+  def menu
     @categories = Category.all
     @dishes = Dish.all.group_by(&:categories_id)
     p @dishes[1]
-    # @categories = Category.get_categories
-    # @result
-    # достать из бд все блюда
-    # отформатировать
   end
 
   def add_dish
-    # если неавторизован -- отрисовать модалку логина
-    redirect_to session_login_url
+    full_cart, model_error = current_user.add_dish_to_cart(params[:id])
+    render json: full_cart.to_json unless model_error
   end
 
   def remove_dish; end
 
-  def get_cart; end
+  def cart
+    render json: current_user.full_cart.to_json
+  end
 end
+
+#   {id:123,count:1234},
+#   {}
+# ]}
+# {
+#   "123": 2,
+#   "234": 3
+# }
+#
+#
+#

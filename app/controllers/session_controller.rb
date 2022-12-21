@@ -1,5 +1,5 @@
 class SessionController < ApplicationController
-  # skip_before_action :require_login, only: %i[login create]
+  before_action :require_login,only: [:logout]
 
   def logout
     sign_out
