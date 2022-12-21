@@ -35,8 +35,11 @@
     </a>
 
     <ul class="nav nav-pills">
-      <%# TODO добавить хелпер, чтобы менять надпись "профиль" на "войти" для неавторизованных пользователей %>
-      <li class="nav-item"><a href="#" class="h4 link mx-5">Профиль</a></li>
+      <%if signed_in?%>
+      <li class="nav-item"><%= link_to 'Профиль', '#', class: "h4 link mx-5" %></li>
+      <%else%>
+      <li class="nav-item"><%= link_to 'Войти', session_sendcode_url, class: "h4 link mx-5" %></li>
+      <%end%>
     </ul>
     <div
       class="btn-group h-75"

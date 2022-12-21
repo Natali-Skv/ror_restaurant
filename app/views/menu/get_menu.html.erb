@@ -1,8 +1,3 @@
-<%# Отображение главной страницы %>
-<%# справа корзина %>
-<%# слева меню %>
-<%# посередине блюда %>
-
 <div
   class="
     d-flex
@@ -18,81 +13,70 @@
   </p>
   <hr>
   <ul class="nav flex-column mb-auto w-100">
-    <% for i in 0..9 do %>
-      <li class="py-2 menu-link text-center">
-        <a href="#" class="h5 link ">
-          Dashboard
-        </a>
+    <% @categories.each do |category| %>
+      <li class="menu-link">
+        <span
+          role='button'
+          link="category-id-<%= category.id  %>"
+          class="h5 link h-100 w-100"
+        ><%= category.name %></span>
       </li>
     <% end %>
   </ul>
   <hr>
 </div>
 
-<div
-  class="
-    d-flex
-    flex-column
-    flex-shrink-0
-    position-fixed
-    w-25
-    overflow-auto
-    p-3
-    mb-3
-    mb-md-0
-    mr-md-3
-  "
-  id="cart"
->
-  <p
-    class="
-      d-flex
-      align-items-center
-      mb-3
-      mb-md-0
-      me-md-auto
-      text-decoration-none
-      clr-grey
-      h3
-    "
-  >Корзина
-  </p>
-  <hr>
-  <ul class="nav nav-pills flex-column mb-auto">
-    <% for i in 0..9 do %>
-      <li>
-        <%# TODO в вашей корзине пока пусто %>
-        <div class="m-1 dish-in-cart">
-          <img class="ms-1 d-inline-block mb-3 cart-dish-img" src="/imgs/dish.webp">
-          <div class="ms-1 d-inline-block mb-3 align-top">
-            <p class="h5">Ролл запеченный тар-тар</p>
-            <div class="d-inline-block me-2 my-3">333 ккал</div>
-            <div class="d-inline-block my-2">500 г</div>
-            <div>
+<div class=" d-flex flex-column flex-shrink-0 w-25 p-3 mb-3 " id="cart-block">
+  <div class="text-center">
+    <p class=" b-3 mb-md-0 text-decoration-none clr-grey h3 ">Корзина
+    </p>
+  </div>
+  <div class=" d-flex overflow-auto p-1 mt-3 mb-md-0 mr-md-3 " id="cart">
+    <ul class="nav nav-pills flex-column mb-auto">
+      <% for i in 0..9 do %>
+        <li>
+          <%# TODO в вашей корзине пока пусто %>
+          <div class="p-2 dish-in-cart">
+            <img class="ms-1 d-inline-block mb-3 cart-dish-img" src="/imgs/dish.webp">
+            <div class="ms-1 d-inline-block mb-3 align-top">
+              <p class="h5">Ролл запеченный тар-тар</p>
+              <div class="d-inline-block me-2 my-3">333 ккал</div>
+              <div class="d-inline-block my-2">500 г</div>
+              <div>
                 <button class="change-count-btn _btn-primary" type="submit">+</button>
                 <button class="change-count-btn _btn-primary" type="submit">-</button>
+              </div>
             </div>
           </div>
-        </div>
-      </li>
-    <% end %>
-  </ul>
-  <hr>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="mt-3 text-end pe-4">
+    <span class=" text-decoration-none clr-grey h3 ">Итого: <%=@total_cost%>₽
+    </span>
+  </div>
+  <%= button_to "Заказать", '#', :method => "post", :class => "add-btn _btn-primary float-right mt-3 me-4 w-50" %>
 </div>
 
 <div class="position-absolute align-items-center" id="menu">
+  <% @dishes.each do |categories_id, dishes| %>
+    <h3 id="category-id-<%= categories_id  %>"><%= @categories[categories_id-1].name %></h3>
 
-  <% for i in 0..9 do %>
-    <div class="dish-cart d-inline-block my-3 mx-2 p-2 align-items-center">
-      <img class="mx-auto d-block mb-3 dish-img" src="/imgs/dish.webp">
-      <p class="h5">Ролл запеченный тар-тар</p>
-      <div class="d-inline-block me-3 my-3">333 ккал</div>
-      <div class="d-inline-block my-3">500 г</div>
-      <div class="dish-descr">Классические пельмени, обжаренные во фритюре. Состав: пшеничное тесто,
-        свинина, говядина, специи.
+    <% dishes.each do |dish| %>
+      <div class="dish-cart d-inline-block my-3 mx-2 p-2 align-items-center">
+        <img class="mx-auto d-block mb-3 dish-img" src="/dishes/<%=dish.image_path%>">
+        <p class="h5"><%= dish.name %></p>
+        <div class="d-inline-block me-3 my-3"><%= dish.calories %>
+          ккал</div>
+        <div class="d-inline-block my-3"><%= dish.weight %>
+          г</div>
+        <div class="dish-descr"><%= dish.description %></div>
+        <div class="d-inline-block h6"><%= dish.price %>
+          ₽</div>
+        <%= button_to "Добавить", menu_add_dish_url( id: dish.id ), :method => "post", :class => "add-btn _btn-primary float-right" %>
       </div>
-      <div class="d-inline-block h6">1000$</div>
-      <button class="add-btn _btn-primary float-right" type="submit">Добавить</button>
-    </div>
+    <% end %>
   <% end %>
+
 </div>

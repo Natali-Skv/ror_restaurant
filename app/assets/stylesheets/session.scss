@@ -1,0 +1,65 @@
+// Place all the styles related to the session controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+#sendcode-block {
+    top: 200px;
+    left: 40%;
+    position: absolute;
+    // right: 28%;
+}
+
+#checkcode-block {
+    top: 200px;
+    left: 40%;
+    position: absolute;
+    // right: 28%;
+}
+
+#phone-input:invalid+span::after {
+    position: absolute;
+    content: "×";
+    font-size: 3rem;
+    padding-left: 5px;
+    color: #f55f67;
+}
+
+#phone-input:valid+span::after {
+    position: absolute;
+    font-size: 3rem;
+    content: "✓";
+    padding-left: 5px;
+    color: #65c888;
+}
+#phone-input:invalid+span+p {
+    visibility: visible;
+}
+
+#phone-input:valid+span+p {
+    display: none;
+}
+
+
+#code-input:invalid+span::after {
+    position: absolute;
+    content: "×";
+    font-size: 3rem;
+    padding-left: 5px;
+    color: #f55f67;
+}
+
+#code-input:valid+span::after {
+    position: absolute;
+    font-size: 3rem;
+    content: "✓";
+    padding-left: 5px;
+    color: #65c888;
+}
+#code-input:invalid+span+p {
+    visibility: visible;
+}
+
+#code-input:valid+span+p {
+    // display: none;
+    visibility: hidden;
+}
