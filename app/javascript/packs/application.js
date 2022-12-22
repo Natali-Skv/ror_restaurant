@@ -56,7 +56,7 @@ function render_cart(data) {
         data.dishes.forEach(function (dish) {
                 let dishLi = document.createElement('li')
                 dishLi.innerHTML = `
-                <div class="p-2 dish-in-cart">
+                <div class="m-2 p-2 dish-in-cart">
                         <img class="ms-1 d-inline-block mb-3 cart-dish-img" src="/dishes/${dish.image_path}">
                                 <div class="dish-in-cart-info ms-1 d-inline-block mb-3 align-top">
                                         <p class="h5">${dish.name}</p>

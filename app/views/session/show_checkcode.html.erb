@@ -6,11 +6,11 @@
   <%end%>
   <p>Мы позвоним на Ваш номер в течении 1 минуты.<br>Введите последние 4 цифры нашего номера.</p>
     <div class="form-floating my-2 form-label-group">
-    <%= form.telephone_field(:phone, readonly: true, value: "#{@phone}", class: "form-control d-inline my-2", id: 'phone-input') %>
+    <%= form.telephone_field(:phone, readonly: true, maxlength: 20, value: "#{@phone}", class: "form-control d-inline my-2", id: 'phone-input') %>
     <label for="phone-input">телефон</label>
     </div>
     <div class="form-floating my-2 form-label-group">
-    <%= form.text_field(:code, class: "form-control d-inline my-2", id: 'code-input', required: true, pattern: "s*[0-9]{4}\s*", placeholder: "1234" ) %>
+    <%= form.text_field(:code, maxlength: 4, class: "form-control d-inline my-2", id: 'code-input', required: true, pattern: "[0-9]{4}", placeholder: "1234" ) %>
     <span ></span>
     <p class="">Пример: 1234</p>
     <label for="code-input">последние 4 цифры</label>

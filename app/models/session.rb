@@ -30,10 +30,6 @@ class Session < ApplicationRecord
       return ERRORS[:INTERNAL_ERROR] unless user
 
       [user, nil]
-      # провалидировать код
-      # сравнить код
-      # если ок то найти или создать пользователя в бд
-      #     редирект на главную + установить куку
     end
 
     def sendcode(phone)
@@ -49,15 +45,6 @@ class Session < ApplicationRecord
 
       save_code_err = add_code_to_cach(phone_i, code)
       return save_code_err if save_code_err
-      # привести к норм виду
-      # сгенерить код
-      # сделать запрос на звонок
-      # оставить дебажный вывод с кодом
-      # добавить код в мемкеш
-      # средиректить на страницу подтверждения кода
-      # добавить отрисовку номера телефона на странице подтверждения
-      # добавить кнопку повторной отправки кода
-      # добавить обработчик повторной отправки кода
     end
 
     def phone_to_i(phone)

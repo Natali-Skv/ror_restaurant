@@ -28,5 +28,21 @@ class OrderController < ApplicationController
 
   def show_create; end
 
-  def list; end
+  def list
+    @orders = []
+    Order.where(users_id: current_user.id).order(created_at: :desc).each do |order|
+      # p order.cart
+      # p JSON.parse(order.cart)
+      parsed_cart = JSON.parse(order.cart)
+      cart = []
+      parsed_cart['dishes'].each do |dish|
+        cart.append(User::ShortDish.new(dish['name'], dish['price'], dish['image_path'], dish['calories'], dish['weight'],
+                                        dish['id'], dish['count']))
+      end
+      p parsed_cart
+      @orders.append(OrderRecord.new(order.id, order.address, order.created_at, cart, parsed_cart['total']))
+    end
+  end
+
+  OrderRecord = Struct.new(:id, :address, :date, :cart, :total)
 end

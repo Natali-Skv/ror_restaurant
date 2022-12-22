@@ -43,3 +43,29 @@
 #cart {
     height: 90% !important;
 }
+
+#order-list-block {
+    top: 200px;
+    left: 10%;
+    width: 60%;
+    position: absolute;
+}
+
+.order-block{
+    width: 100%;
+    height: 30%;
+    background-color: #ffc1c429;
+    border-radius: 5px;
+}
+
+.order-list-cart-block {
+    float: right;
+    right: 2%;
+    color: #5E5656;
+    background-color: #ffc1c429;
+    border-radius: 25px;
+}
+
+.order-cart {
+    height: 400px !important;
+}

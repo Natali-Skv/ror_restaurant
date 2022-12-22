@@ -9,13 +9,13 @@
         <label for="phone-input">телефон</label>
     </div>
     <div class="form-floating mb-5 form-label-group">
-        <%= form.text_field(:address, class: "form-control d-inline my-1", id: 'address-input', required: true, pattern: "^[0-9A-Za-zА-Яа-яЁё\s\,\;\\-\\\.(\)\№\#\\\\/]{10,}$" ) %>
+        <%= form.text_field(:address, maxlength: 256, class: "form-control d-inline my-1", id: 'address-input', required: true, pattern: "^[0-9A-Za-zА-Яа-яЁё\s\,\;\\-\\\.(\)\№\#\\\\/]{10,}$" ) %>
         <span ></span>
         <p class="">Москва, Измайловский проспект, 73/2</p>
         <label for="code-input">адрес доставки</label>
     </div>
     <div class="form-floating mb-3 form-label-group">
-        <%= form.text_area(:comment, class: "form-control d-inline my-1", id: 'commen-input' ) %>
+        <%= form.text_area(:comment, class: "form-control d-inline my-1", maxlength: 256,  id: 'commen-input' ) %>
         <p class="">Расскажите, как Вас найти или о своих пожеланиях к блюдам</p>
         <label for="code-input">комментарий к заказу</label>
     <%= form.submit('Подтвердить',  class: "h-3 rem-3 w-100  _btn-primary mt-3") %>

@@ -1,5 +1,9 @@
 class Order < ApplicationRecord
+  include ActiveModel::Validations
   belongs_to :users, class_name: 'User', foreign_key: 'users_id'
+  validates :cart, presence: true, length: { minimum: 10 }
+  validates :address, presence: true, length: { minimum: 5 }
+  validates :users_id, presence: true
 
   ERRORS = {
     INTERNAL_ERROR: 'internal error',
@@ -14,6 +18,7 @@ class Order < ApplicationRecord
       p current_user
 
       return ERRORS[:EMPTY_CART] if current_user.cart_empty?
+
       cart = current_user.full_cart
       return ERRORS[:EMPTY_ADDRESS] if address.nil? || address.empty?
 

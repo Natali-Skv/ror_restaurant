@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  include ActiveModel::Validations
+  validates :phone, presence: true, uniqueness: true,
+                    numericality: { greater_than_or_equal_to: 79_000_000_000, less_than_or_equal_to: 79_999_999_999 }
   ERRORS = {
     INTERNAL_ERROR: 'internal error',
     NO_SUCH_DISH: 'no such dish in menu'
@@ -25,7 +28,7 @@ class User < ApplicationRecord
 
     self.cart = cart.to_json
     save
-    [full_cart_parsed(cart), nil]
+    [User.full_cart_parsed(cart), nil]
   end
 
   def add_dish_to_cart(dish_id)
@@ -45,20 +48,7 @@ class User < ApplicationRecord
     end
     self.cart = cart.to_json
     save
-    [full_cart_parsed(cart), nil]
-  end
-
-  def full_cart_parsed(cart)
-    full_cart = { total: 0, dishes: [] }
-    cart.each do |id, count|
-      dish = Dish.find_by(id: id)
-      full_cart[:dishes].append(ShortDish.new(dish.name, dish.price, dish.image_path, dish.calories, dish.weight,
-                                              id, count))
-      full_cart[:total] += dish.price * count
-    end
-    p full_cart
-    full_cart
-    # проитерироваться по корзине, собрать массив блюд, посчитать общую стоимость
+    [User.full_cart_parsed(cart), nil]
   end
 
   def full_cart
@@ -73,6 +63,21 @@ class User < ApplicationRecord
     p full_cart
     full_cart
     # проитерироваться по корзине, собрать массив блюд, посчитать общую стоимость
+  end
+
+  class << self
+    def full_cart_parsed(cart)
+      full_cart = { total: 0, dishes: [] }
+      cart.each do |id, count|
+        dish = Dish.find_by(id: id)
+        full_cart[:dishes].append(ShortDish.new(dish.name, dish.price, dish.image_path, dish.calories, dish.weight,
+                                                id, count))
+        full_cart[:total] += dish.price * count
+      end
+      p full_cart
+      full_cart
+      # проитерироваться по корзине, собрать массив блюд, посчитать общую стоимость
+    end
   end
 
   ShortDish = Struct.new(:name, :price, :image_path, :calories, :weight, :id, :count)

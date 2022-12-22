@@ -27,6 +27,10 @@ body {
     color: #f55f67;
 }
 
+#header_block {
+    height: 126px;
+}
+
 .menu-link:hover {
     text-decoration: none;
     background-color: #f55f6748;
@@ -199,3 +203,4 @@ body {
     position: relative;
     margin-bottom: 1rem;
 }
+
