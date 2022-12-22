@@ -31,6 +31,7 @@
     padding-left: 5px;
     color: #65c888;
 }
+
 #phone-input:invalid+span+p {
     visibility: visible;
 }
@@ -38,7 +39,6 @@
 #phone-input:valid+span+p {
     display: none;
 }
-
 
 #code-input:invalid+span::after {
     position: absolute;
@@ -55,6 +55,7 @@
     padding-left: 5px;
     color: #65c888;
 }
+
 #code-input:invalid+span+p {
     visibility: visible;
 }

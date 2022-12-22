@@ -91,7 +91,7 @@ body {
 }
 
 #cart {
-  max-height: 80%;
+  height: 80%;
 }
 
 #menu {
@@ -174,7 +174,7 @@ body {
 
 
 .cart-dish-img {
-    width: 120px;
+    width: 32%;
     border-radius: 5px;
     vertical-align: bottom;
 }
@@ -189,6 +189,10 @@ body {
 
 .dish-in-cart {
     background-color: #ffc1c436;
+}
+
+.dish-in-cart-info{
+    width: 64%;
 }
 
 .form-label-group {

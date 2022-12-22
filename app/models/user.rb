@@ -4,7 +4,33 @@ class User < ApplicationRecord
     NO_SUCH_DISH: 'no such dish in menu'
   }.freeze
 
+  def clean_cart
+    self.cart = '{}'
+    save
+  end
+
+  def cart_empty?
+    cart == '{}'
+  end
+
+  def remove_dish_from_cart(dish_id)
+    cart = JSON.parse self.cart
+    p cart
+    p cart[dish_id]
+
+    return [nil, ERRORS[:NO_SUCH_DISH]] unless cart[dish_id] || cart[dish_id].zero?
+
+    cart[dish_id] -= 1
+    cart.delete(dish_id) if cart[dish_id].zero?
+
+    self.cart = cart.to_json
+    save
+    [full_cart_parsed(cart), nil]
+  end
+
   def add_dish_to_cart(dish_id)
+    p '====23===='
+    p cart
     cart = JSON.parse self.cart
     p cart
     p cart[dish_id]

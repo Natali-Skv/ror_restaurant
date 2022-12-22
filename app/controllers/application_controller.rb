@@ -2,10 +2,7 @@ class ApplicationController < ActionController::Base
   include SessionHelper
 
   def require_login
-    unless signed_in?
-      flash[:danger] = 'Требуется логин'
-      redirect_to session_sendcode_url
-    end
+    redirect_to session_sendcode_url unless signed_in?
   end
 
   def redirect_to404

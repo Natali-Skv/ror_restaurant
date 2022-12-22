@@ -1,0 +1,45 @@
+// Place all the styles related to the order controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+#create-order-block {
+    top: 200px;
+    left: 5%;
+    position: absolute;
+}
+
+#address-input:invalid+span::after {
+    position: absolute;
+    content: "×";
+    font-size: 3rem;
+    padding-left: 5px;
+    color: #f55f67;
+}
+
+#address-input:valid+span::after {
+    position: absolute;
+    font-size: 3rem;
+    content: "✓";
+    padding-left: 5px;
+    color: #65c888;
+}
+
+#commen-input {
+    min-height: 4rem;
+}
+
+#order-cart-block {
+    top: 126px;
+    border-radius: 25px;
+    position: fixed;
+    left: 40%;
+    height: 80%;
+    width: 26%;
+    height: 80%;
+    color: #5E5656;
+    background-color: #ffc1c429;
+}
+
+#cart {
+    height: 90% !important;
+}

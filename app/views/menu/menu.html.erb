@@ -38,7 +38,7 @@
     <span class=" text-decoration-none clr-grey h3 ">Итого: <span id="total-price">0</span>₽
     </span>
   </div>
-  <%= button_to "Заказать", '#', :method => "post", :class => "float-end _btn-primary mt-3 me-4 w-50" %>
+<%= button_to "Заказать", order_show_create_url, :method => "get", :class => "float-end _btn-primary mt-3 me-4 w-50" %>
 </div>
 
 <div class="position-absolute align-items-center" id="menu">

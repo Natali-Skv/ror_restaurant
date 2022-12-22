@@ -23,7 +23,7 @@ $(document).on('turbolinks:load', function () {
 
         if (document.getElementById('cart')) {
                 $.ajax({
-                        url: "menu/cart",
+                        url: "/menu/cart",
                         context: document.body,
                         success: function (xrs) {
                                 render_cart(xrs);
@@ -36,7 +36,6 @@ $(document).on('turbolinks:load', function () {
         })
 });
 
-
 function render_cart(data) {
         $('#cart').empty();
         let cart = document.getElementById("cart");
@@ -44,19 +43,34 @@ function render_cart(data) {
         cartUl.className = "nav nav-pills flex-column mb-auto"
         cart.appendChild(cartUl)
 
+        if (!data.dishes || !data.dishes.length) {
+                let emptyCartMsg = document.createElement('li')
+                emptyCartMsg.innerText = 'Ваша корзина пуста...'
+                emptyCartMsg.className = 'mt-3 h4'
+                cartUl.appendChild(emptyCartMsg)
+                let totalElem = document.getElementById('total-price')
+                totalElem.innerText = 0
+                return
+        }
+
         data.dishes.forEach(function (dish) {
                 let dishLi = document.createElement('li')
                 dishLi.innerHTML = `
                 <div class="p-2 dish-in-cart">
                         <img class="ms-1 d-inline-block mb-3 cart-dish-img" src="/dishes/${dish.image_path}">
-                                <div class="ms-1 d-inline-block mb-3 align-top">
+                                <div class="dish-in-cart-info ms-1 d-inline-block mb-3 align-top">
                                         <p class="h5">${dish.name}</p>
                                         <div class="d-inline-block me-2 my-3">${dish.calories} ккал</div>
                                         <div class="d-inline-block my-2">${dish.weight} г</div>
                                 <div>
-                                        <button class="upd-cart change-count-btn _btn-primary" type="submit">+</button>
-                                        <button class="upd-cart change-count-btn _btn-primary" type="submit">-</button>
-                                        <div class="d-inline ms-5 h5">${dish.price} ₽</div>
+                                <form class="button_to d-inline" method="post" action="/menu/add_dish/${dish.id}.json" data-remote="true">
+                                        <input class="upd-cart changse-count-btn _btn-primary" type="submit" value="+">
+                                </form>
+                                        <div class="d-inline mx-2 h5">${dish.count}</div>
+                                <form class="button_to d-inline" method="post" action="/menu/remove_dish/${dish.id}.json" data-remote="true">
+                                        <input class="upd-cart changse-count-btn _btn-primary" type="submit" value="-">
+                                </form>
+                                        <div class="d-inline float-end h5">${dish.price} ₽</div>
                                 </div>
                         </div>
                 </div>
@@ -65,4 +79,14 @@ function render_cart(data) {
         });
         let totalElem = document.getElementById('total-price')
         totalElem.innerText = data.total
+        $('form.button_to').on("ajax:success", function (xrs, data, status) {
+                render_cart(xrs.detail[0]);
+        })
 }
+
+{/* <form class="button_to" method="post" action="http://localhost:3000/menu/add_dish/616.json" data-remote="true">
+        <input class="upd-cart mb-3 add-btn _btn-primary" type="submit" value="Добавить">
+                <input type="hidden" name="authenticity_token" value="xIfQdMSutcTRThfNJ0iVV2deNsWvOi3foDchTk_bFE7iCnH5J19whcUA582U8BiF114KSpd6cB2D6oa-RZdLYw" autocomplete="off">
+</form> */}
+
+// <button class="upd-cart changse-count-btn _btn-primary" type="submit">+</button>
