@@ -14,7 +14,7 @@ class OrderController < ApplicationController
     p comment
     case model_error
     when nil
-      redirect_to root_url
+      redirect_to order_list_url
     when Order::ERRORS[:EMPTY_ADDRESS]
       @error = 'Необходимо указать адрес'
       render :show_create
