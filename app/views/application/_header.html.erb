@@ -1,71 +1,70 @@
-<%# <link
-  href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
-  rel="stylesheet"
->
-<script
-  src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"
-></script> %>
-  <div class="mx-0 fixed-top bclr-light-grey w-100" id="header_block">
-    <div class="container fixed-top bclr-light-grey">
-      <header
-        class="
-          d-flex
-          flex-wrap
-          justify-content-center
-          py-2
-          mb-4
-          border-bottom
-          align-items-center
-        "
-      >
-        <a
-          href="/"
-          class="
-            d-flex
-            align-items-center
-            mb-3
-            mb-md-0
-            me-md-auto
-            text-dark
-            text-decoration-none
-          "
-        >
-          <img class="me-5 mb-md-0" src="/imgs/logo.svg" alt="На главную" height="85">
-          <img class="me-1" src="/imgs/location.svg" height="40">
-          <span class="h5 clr-grey mb-0">Москва</span>
-        </a>
+<div class="mx-0 fixed-top bclr-light-grey w-100" id="header_block">
+  <div class="container fixed-top bclr-light-grey">
+    <header
+      class="
+        d-flex
+        flex-wrap
+        justify-content-center
+        py-2
+        mb-4
+        border-bottom
+        align-items-center
+      "
+    >
+      <%= link_to  root_url, class: "d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none" do %>
+        <img class="me-5 mb-md-0" src="/imgs/logo.svg" alt="На главную" height="85">
+        <img class="me-1" src="/imgs/location.svg" height="40">
+        <span class="h5 clr-grey mb-0"><%= t(:todo1) %></span>
+      <% end %>
 
-        <ul class="nav nav-pills">
-          <% if signed_in? %>
-            <li class="nav-item"><%= link_to 'Мои заказы', order_list_url, class: "h3 link me-3" %></li>
-            <li class="nav-item"><%= link_to 'Выйти', session_logout_url, class: "h5 link mx-5" %></li>
-          <% else %>
-            <li class="nav-item"><%= link_to 'Войти', session_sendcode_url, class: "h4 link mx-5" %></li>
-          <% end %>
-        </ul>
-        <div
-          class="btn-group h-75"
-          role="group"
-          aria-label="Vertical radio toggle button group"
-        >
+      <ul class="nav nav-pills">
+        <% if signed_in? %>
+          <li class="nav-item"><%= link_to 'Мои заказы', order_list_url, class: "h3 link me-3" %></li>
+          <li class="nav-item"><%= link_to 'Выйти', session_logout_url, class: "h5 link mx-5" %></li>
+        <% else %>
+          <li class="nav-item"><%= link_to 'Войти', session_sendcode_url, class: "h4 link mx-5" %></li>
+        <% end %>
+      </ul>
+      <div
+        class="btn-group h-75"
+        role="group"
+        aria-label="Vertical radio toggle button group"
+      >
+
+        <% if params[:locale]=='en' %>
           <input
             type="radio"
             class="btn-check"
-            name="vbtn-radio"
-            id="vbtn-radio1"
-            autocomplete="off"
+            id="radio-ru"
+            lang="ru"
+          >
+          <label class="btn btn-outline-base" for="radio-ru">Ru</label>
+          <input
+            type="radio"
+            class="btn-check"
+            id="radio-en"
+            lang="en"
             checked
           >
-          <label class="btn btn-outline-base" for="vbtn-radio1">Ru</label>
+          <label class="btn btn-outline-base" for="radio-en">En</label>
+        <% else %>
           <input
             type="radio"
             class="btn-check"
-            name="vbtn-radio"
-            id="vbtn-radio3"
-            autocomplete="off"
+            id="radio-ru"
+            lang="ru"
+            checked
           >
-          <label class="btn btn-outline-base" for="vbtn-radio3">En</label>
-        </div>
-      </header>
-    </div>
+          <label class="btn btn-outline-base" for="radio-ru">Ru</label>
+          <input
+            type="radio"
+            class="btn-check"
+            id="radio-en"
+            lang="en"
+          >
+          <label class="btn btn-outline-base" for="radio-en">En</label>
+        <% end %>
+      </div>
+    </header>
   </div>
+</div>

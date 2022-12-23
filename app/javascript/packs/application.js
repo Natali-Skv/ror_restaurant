@@ -14,6 +14,9 @@ ActiveStorage.start()
 
 
 $(document).on('turbolinks:load', function () {
+        $("#radio-ru,#radio-en").on('click', function (e) {
+                window.location = `${window.location.pathname}?locale=${e.target.getAttribute("lang")}`;
+        })
         $(".menu-link>span").on('click', function (event) {
                 console.log(event.target.getAttribute("link"))
                 $('html, body').animate({

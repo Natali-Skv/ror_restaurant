@@ -35,10 +35,11 @@
 
   </div>
   <div class="mt-3 text-end pe-4">
-    <span class=" text-decoration-none clr-grey h3 ">Итого: <span id="total-price">0</span>₽
+    <span class=" text-decoration-none clr-grey h3 ">Итого:
+      <span id="total-price">0</span>₽
     </span>
   </div>
-<%= button_to "Заказать", order_show_create_url, :method => "get", :class => "float-end _btn-primary mt-3 me-4 w-50" %>
+  <%= link_to 'Заказать', order_show_create_url, class: "float-end _btn-primary mt-3 me-4 w-75 mx-auto" %>
 </div>
 
 <div class="position-absolute align-items-center" id="menu">
@@ -54,7 +55,7 @@
         <div class="d-inline-block my-3"><%= dish.weight %>
           г</div>
         <div class="dish-descr"><%= dish.description %></div>
-          <div class="d-inline-block h6"><%= dish.price %>₽</div>
+        <div class="d-inline-block h6"><%= dish.price %>₽</div>
         <div class="d-inline-block float-end">
           <%= button_to "Добавить", menu_add_dish_url(:format => "json", id: dish.id), :method => "post",remote: true, :class => "upd-cart mb-3 add-btn _btn-primary" %>
         </div>
