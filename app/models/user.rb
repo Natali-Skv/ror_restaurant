@@ -18,9 +18,6 @@ class User < ApplicationRecord
 
   def remove_dish_from_cart(dish_id)
     cart = JSON.parse self.cart
-    p cart
-    p cart[dish_id]
-
     return [nil, ERRORS[:NO_SUCH_DISH]] unless cart[dish_id] || cart[dish_id].zero?
 
     cart[dish_id] -= 1
@@ -32,19 +29,13 @@ class User < ApplicationRecord
   end
 
   def add_dish_to_cart(dish_id)
-    p '====23===='
-    p cart
     cart = JSON.parse self.cart
-    p cart
-    p cart[dish_id]
     if cart[dish_id]
       cart[dish_id] += 1
-      p cart
     else
       return [nil, ERRORS[:NO_SUCH_DISH]] unless Dish.exists?(id: dish_id)
 
       cart[dish_id] = 1
-      p cart
     end
     self.cart = cart.to_json
     save
@@ -60,7 +51,6 @@ class User < ApplicationRecord
                                               id, count))
       full_cart[:total] += dish.price * count
     end
-    p full_cart
     full_cart
     # проитерироваться по корзине, собрать массив блюд, посчитать общую стоимость
   end
@@ -74,9 +64,7 @@ class User < ApplicationRecord
                                                 id, count))
         full_cart[:total] += dish.price * count
       end
-      p full_cart
       full_cart
-      # проитерироваться по корзине, собрать массив блюд, посчитать общую стоимость
     end
   end
 

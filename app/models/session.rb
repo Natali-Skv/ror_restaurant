@@ -18,9 +18,7 @@ class Session < ApplicationRecord
     API_KEY = 'PkzvymZDAVs0qasTSsdz1bxhhA'.freeze
 
     def checkcode(phone, code)
-      p phone
       phone_i = phone_to_i(phone)
-      p phone_i
       return [nil, ERRORS[:INVALID_PHONE]] unless validate_phone(phone_i)
       return [nil, ERRORS[:INVALID_CODE]] unless validate_code(code)
       return [nil, ERRORS[:WRONG_CODE]] unless code == get_code_from_cach(phone_i)
@@ -33,13 +31,11 @@ class Session < ApplicationRecord
     end
 
     def sendcode(phone)
-      p phone
       phone_i = phone_to_i(phone)
-      p phone_i
       return ERRORS[:INVALID_PHONE] unless validate_phone(phone_i)
 
       code = (SecureRandom.random_number(9999) + 10_000).to_s[1..]
-      p code
+      p "~~~~~~~~~~~~~~~~~#{code}~~~~~~~~~~~~~~~"
       flashcall_err = flashcall(phone_i, code)
       return flashcall_err if flashcall_err
 
@@ -72,7 +68,6 @@ class Session < ApplicationRecord
 
     def flashcall(phone, code)
       # RestClient.get("http://#{EMAIL}:#{API_KEY}@gate.smsaero.ru/v2/flashcall/send?phone=#{phone}&code=#{code}") do |response, _request, _result|
-      #   p response
       #   case response.code
       #   when 200
       #     nil
@@ -89,9 +84,7 @@ class Session < ApplicationRecord
     end
 
     def get_code_from_cach(phone)
-      code = MC.get(phone)
-      p code
-      code
+      MC.get(phone)
     end
   end
 end

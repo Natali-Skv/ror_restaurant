@@ -4,7 +4,6 @@ class MenuController < ApplicationController
   def menu
     @categories = Category.all
     @dishes = Dish.all.group_by(&:categories_id)
-    p @dishes[1]
   end
 
   def add_dish
@@ -19,17 +18,7 @@ class MenuController < ApplicationController
 
   def cart
     return render json: {} unless signed_in?
+
     render json: current_user.full_cart.to_json
   end
 end
-
-#   {id:123,count:1234},
-#   {}
-# ]}
-# {
-#   "123": 2,
-#   "234": 3
-# }
-#
-#
-#

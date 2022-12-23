@@ -13,11 +13,13 @@ import { I18n } from "i18n-js";
 const i18n = new I18n({
         en: {
           calories: "kcal",
-          gramm: "g"
+          gramm: "g",
+          empty_cart_msg: "Your cart is empty..."
         },
         ru: {
           calories: "ккал",
-          gramm: "г"
+          gramm: "г",
+          empty_cart_msg: "Ваша корзина пуста..."
         },
       });
 
@@ -26,11 +28,6 @@ Turbolinks.start()
 ActiveStorage.start()
 
 $(document).on('turbolinks:load', function () {
-        console.log(i18n.locale)
-        console.log(i18n.t('gramm'))
-        i18n.locale = $('body').data('locale')
-        console.log(i18n.locale)
-        console.log(i18n.t('gramm'))
         $("#radio-ru,#radio-en").on('click', function (e) {
                 window.location = `${window.location.pathname}?locale=${e.target.getAttribute("lang")}`;
         })
@@ -65,7 +62,7 @@ function render_cart(data) {
 
         if (!data.dishes || !data.dishes.length) {
                 let emptyCartMsg = document.createElement('li')
-                emptyCartMsg.innerText = 'Ваша корзина пуста...'
+                emptyCartMsg.innerText = i18n.t('empty_cart_msg')
                 emptyCartMsg.className = 'mt-3 h4'
                 cartUl.appendChild(emptyCartMsg)
                 let totalElem = document.getElementById('total-price')

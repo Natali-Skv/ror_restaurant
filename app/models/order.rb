@@ -13,10 +13,6 @@ class Order < ApplicationRecord
 
   class << self
     def create_order(current_user, address, comment)
-      p current_user.id
-      p '===12=='
-      p current_user
-
       return ERRORS[:EMPTY_CART] if current_user.cart_empty?
 
       cart = current_user.full_cart

@@ -1,22 +1,21 @@
 <div id ="checkcode-block" class="w-25">
 <%= form_with  url: session_checkcode_url, :method => 'post', id: 'checkcode-form' do  |form| %>
-  <h1 class="h2 mb-3 fw-normal">Подтверждение</h1>
+  <h1 class="h2 mb-3 fw-normal"><%=t(:confirmation)%></h1>
   <% if @error %>
     <h3 class="h3 my-3 fw-normal clr-red"><%=@error%></h1>
   <%end%>
-  <p>Мы позвоним на Ваш номер в течении 1 минуты.<br>Введите последние 4 цифры нашего номера.</p>
+  <p><%=t(:how_to_get_code)%><br><%=t(:how_to_get_code2)%></p>
     <div class="form-floating my-2 form-label-group">
     <%= form.telephone_field(:phone, readonly: true, maxlength: 20, value: "#{@phone}", class: "form-control d-inline my-2", id: 'phone-input') %>
-    <label for="phone-input">телефон</label>
+    <label for="phone-input"><%=t(:phone)%></label>
     </div>
     <div class="form-floating my-2 form-label-group">
     <%= form.text_field(:code, maxlength: 4, class: "form-control d-inline my-2", id: 'code-input', required: true, pattern: "[0-9]{4}", placeholder: "1234" ) %>
     <span ></span>
-    <p class="">Пример: 1234</p>
-    <label for="code-input">последние 4 цифры</label>
-    <%= form.submit('Подтвердить',  class: "h-3 rem-3 w-100  _btn-primary mt-3") %>
+    <p class=""><%=t(:code_example)%></p>
+    <label for="code-input"><%=t(:code_label)%></label>
+    <%= form.submit("#{t(:confirm)}",  class: "h-3 rem-3 w-100  _btn-primary mt-3") %>
     </div>
 <% end %>
-  <%# <button class="h-3 rem-3 w-100  _btn-primary mt-3" type="submit">TODO Позвонить снова</button> %>
-  <%= button_to "Изменить телефон", session_show_sendcode_path, :method => "get",class: "h-3 rem-3 w-100  _btn-secondary mt-3" %>
+  <%= button_to "#{t(:change_phone)}", session_show_sendcode_path, :method => "get",class: "h-3 rem-3 w-100  _btn-secondary mt-3" %>
   </div>
