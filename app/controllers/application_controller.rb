@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include SessionHelper
-  around_action :switch_locale
+  before_action :set_locale
 
   def require_login
     redirect_to session_sendcode_url unless signed_in?
@@ -10,14 +10,10 @@ class ApplicationController < ActionController::Base
     { locale: I18n.locale }
   end
 
-  def switch_locale(&action)
+  def set_locale
     parsed_locale = params[:locale]
-    p 'TODOTODO'
-    p parsed_locale
-    p I18n.available_locales
-    # locale = I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : I18n.default_locale
-    locale = params[:locale] || I18n.default_locale
-    I18n.with_locale(locale, &action)
+    locale = I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : I18n.default_locale
+    I18n.locale = locale || I18n.default_locale
   end
 
   def redirect_to404

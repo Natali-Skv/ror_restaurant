@@ -1,0 +1,5 @@
+en:
+  js:
+    browser:
+      not_supported: |
+        This browser is ancient. Please use the latest version of Chrome, Firefox or Safari.

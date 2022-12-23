@@ -9,7 +9,7 @@
   "
   id="menu-navbar"
 >
-  <p class=" d-flex mb-3 mb-md-0 text-decoration-none clr-grey h3 ">Меню
+  <p class=" d-flex mb-3 mb-md-0 text-decoration-none clr-grey h3 "><%=t(:menu)%>
   </p>
   <hr>
   <ul class="nav flex-column mb-auto w-100">
@@ -28,14 +28,14 @@
 
 <div class=" d-flex flex-column flex-shrink-0 w-25 p-3 mb-3 " id="cart-block">
   <div class="text-center">
-    <p class=" b-3 mb-md-0 text-decoration-none clr-grey h3 ">Корзина
+    <p class=" b-3 mb-md-0 text-decoration-none clr-grey h3 "><%=t(:cart)%>
     </p>
   </div>
   <div class=" d-flex overflow-auto p-1 mt-3 mb-md-0 mr-md-3 " id="cart">
 
   </div>
   <div class="mt-3 text-end pe-4">
-    <span class=" text-decoration-none clr-grey h3 ">Итого:
+    <span class=" text-decoration-none clr-grey h3 "><%=t(:total)%>:
       <span id="total-price">0</span>₽
     </span>
   </div>
@@ -51,13 +51,13 @@
         <img class="mx-auto d-block mb-3 dish-img" src="/dishes/<%=dish.image_path%>">
         <p class="h5"><%= dish.name %></p>
         <div class="d-inline-block me-3 my-3"><%= dish.calories %>
-          ккал</div>
+          <%=t(:calories)%></div>
         <div class="d-inline-block my-3"><%= dish.weight %>
-          г</div>
+          <%=t(:gramm)%></div>
         <div class="dish-descr"><%= dish.description %></div>
         <div class="d-inline-block h6"><%= dish.price %>₽</div>
         <div class="d-inline-block float-end">
-          <%= button_to "Добавить", menu_add_dish_url(:format => "json", id: dish.id), :method => "post",remote: true, :class => "upd-cart mb-3 add-btn _btn-primary" %>
+          <%= button_to "#{t(:add_to_cart)}", menu_add_dish_url(:format => "json", id: dish.id), :method => "post",remote: true, :class => "upd-cart mb-3 add-btn _btn-primary" %>
         </div>
       </div>
     <% end %>

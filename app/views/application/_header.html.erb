@@ -1,3 +1,4 @@
+
 <div class="mx-0 fixed-top bclr-light-grey w-100" id="header_block">
   <div class="container fixed-top bclr-light-grey">
     <header
@@ -14,15 +15,15 @@
       <%= link_to  root_url, class: "d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none" do %>
         <img class="me-5 mb-md-0" src="/imgs/logo.svg" alt="На главную" height="85">
         <img class="me-1" src="/imgs/location.svg" height="40">
-        <span class="h5 clr-grey mb-0"><%= t(:todo1) %></span>
+        <span class="h5 clr-grey mb-0"><%= t(:moscow) %></span>
       <% end %>
 
       <ul class="nav nav-pills">
         <% if signed_in? %>
-          <li class="nav-item"><%= link_to 'Мои заказы', order_list_url, class: "h3 link me-3" %></li>
-          <li class="nav-item"><%= link_to 'Выйти', session_logout_url, class: "h5 link mx-5" %></li>
+          <li class="nav-item"><%= link_to t(:my_orders), order_list_url, class: "h3 link me-3" %></li>
+          <li class="nav-item"><%= link_to t(:logout), session_logout_url, class: "h5 link mx-5" %></li>
         <% else %>
-          <li class="nav-item"><%= link_to 'Войти', session_sendcode_url, class: "h4 link mx-5" %></li>
+          <li class="nav-item"><%= link_to t(:login), session_sendcode_url, class: "h4 link mx-5" %></li>
         <% end %>
       </ul>
       <div

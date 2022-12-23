@@ -1,2 +1,11 @@
 ru:
-  todo1: "Москва"
+  moscow: "Москва"
+  my_orders: "Мои заказы"
+  login: "Войти"
+  logout: "Выйти"
+  menu: "Меню"
+  cart: "Корзина"
+  total: "Итого"
+  calories: "ккал"
+  gramm: "г"
+  add_to_cart: "Добавить"

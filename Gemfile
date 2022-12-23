@@ -37,6 +37,8 @@ gem 'rest-client', '~> 2.1'
 
 gem 'dalli'
 
+# gem 'i18n-js'
+gem 'i18n-js'
 gem 'rails-i18n'
 
 group :development, :test do

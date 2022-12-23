@@ -30,4 +30,13 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  todo1: "Moscow"
+  moscow: "Moscow"
+  my_orders: "My orders"
+  login: "Login"
+  logout: "Logout"
+  menu: "Menu"
+  cart: "Cart"
+  total: "Total"
+  calories: "kcal"
+  gramm: "g"
+  add_to_cart: "Add"

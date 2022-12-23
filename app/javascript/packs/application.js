@@ -8,12 +8,29 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+import { I18n } from "i18n-js";
+
+const i18n = new I18n({
+        en: {
+          calories: "kcal",
+          gramm: "g"
+        },
+        ru: {
+          calories: "ккал",
+          gramm: "г"
+        },
+      });
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-
 $(document).on('turbolinks:load', function () {
+        console.log(i18n.locale)
+        console.log(i18n.t('gramm'))
+        i18n.locale = $('body').data('locale')
+        console.log(i18n.locale)
+        console.log(i18n.t('gramm'))
         $("#radio-ru,#radio-en").on('click', function (e) {
                 window.location = `${window.location.pathname}?locale=${e.target.getAttribute("lang")}`;
         })
@@ -63,8 +80,8 @@ function render_cart(data) {
                         <img class="ms-1 d-inline-block mb-3 cart-dish-img" src="/dishes/${dish.image_path}">
                                 <div class="dish-in-cart-info ms-1 d-inline-block mb-3 align-top">
                                         <p class="h5">${dish.name}</p>
-                                        <div class="d-inline-block me-2 my-3">${dish.calories} ккал</div>
-                                        <div class="d-inline-block my-2">${dish.weight} г</div>
+                                        <div class="d-inline-block me-2 my-3">${dish.calories} ${i18n.t('calories')}</div>
+                                        <div class="d-inline-block my-2">${dish.weight} ${i18n.t('gramm')}</div>
                                 <div>
                                 <form class="button_to d-inline" method="post" action="/menu/remove_dish/${dish.id}.json" data-remote="true">
                                         <input class="upd-cart changse-count-btn _btn-primary" type="submit" value="-">
@@ -83,13 +100,10 @@ function render_cart(data) {
         let totalElem = document.getElementById('total-price')
         totalElem.innerText = data.total
         $('form.button_to').on("ajax:success", function (xrs, data, status) {
+                console.log(xrs.currentTarget.action)
+                console.log(xrs.detail[0])
+                console.log(data)
+                console.log(status)
                 render_cart(xrs.detail[0]);
         })
 }
-
-{/* <form class="button_to" method="post" action="http://localhost:3000/menu/add_dish/616.json" data-remote="true">
-        <input class="upd-cart mb-3 add-btn _btn-primary" type="submit" value="Добавить">
-                <input type="hidden" name="authenticity_token" value="xIfQdMSutcTRThfNJ0iVV2deNsWvOi3foDchTk_bFE7iCnH5J19whcUA582U8BiF114KSpd6cB2D6oa-RZdLYw" autocomplete="off">
-</form> */}
-
-// <button class="upd-cart changse-count-btn _btn-primary" type="submit">+</button>
