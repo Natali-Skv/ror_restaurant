@@ -63,12 +63,12 @@ function render_cart(data) {
                                         <div class="d-inline-block me-2 my-3">${dish.calories} ккал</div>
                                         <div class="d-inline-block my-2">${dish.weight} г</div>
                                 <div>
-                                <form class="button_to d-inline" method="post" action="/menu/add_dish/${dish.id}.json" data-remote="true">
-                                        <input class="upd-cart changse-count-btn _btn-primary" type="submit" value="+">
-                                </form>
-                                        <div class="d-inline mx-2 h5">${dish.count}</div>
                                 <form class="button_to d-inline" method="post" action="/menu/remove_dish/${dish.id}.json" data-remote="true">
                                         <input class="upd-cart changse-count-btn _btn-primary" type="submit" value="-">
+                                </form>
+                                        <div class="d-inline mx-2 h5">${dish.count}</div>
+                                <form class="button_to d-inline" method="post" action="/menu/add_dish/${dish.id}.json" data-remote="true">
+                                        <input class="upd-cart changse-count-btn _btn-primary" type="submit" value="+">
                                 </form>
                                         <div class="d-inline float-end h5">${dish.price} ₽</div>
                                 </div>
