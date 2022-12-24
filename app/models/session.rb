@@ -24,8 +24,8 @@ class Session < ApplicationRecord
       return [nil, ERRORS[:WRONG_CODE]] unless code == get_code_from_cach(phone_i)
 
       user = User.find_by(phone: phone_i)
-      user ||= User.create(phone: phone_i)
-      return ERRORS[:INTERNAL_ERROR] unless user
+      user ||= User.create(phone: phone_i, cart: '{}')
+      return [nil, ERRORS[:INTERNAL_ERROR]] unless user.valid?
 
       [user, nil]
     end

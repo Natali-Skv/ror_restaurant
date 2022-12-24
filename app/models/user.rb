@@ -52,7 +52,6 @@ class User < ApplicationRecord
       full_cart[:total] += dish.price * count
     end
     full_cart
-    # проитерироваться по корзине, собрать массив блюд, посчитать общую стоимость
   end
 
   class << self
