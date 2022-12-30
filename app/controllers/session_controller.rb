@@ -12,7 +12,7 @@ class SessionController < ApplicationController
     return redirect_to root_url if signed_in?
 
     model_error = Session.sendcode(params[:phone])
-    @phone = Session.beauty_phone(params[:phone])
+    @phone = params[:phone]
     case model_error
     when nil, Session::ERRORS[:ALREADY_IN_QUEUE]
       render :show_checkcode

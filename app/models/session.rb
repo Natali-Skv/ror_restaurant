@@ -37,7 +37,7 @@ class Session < ApplicationRecord
       code = (SecureRandom.random_number(9999) + 10_000).to_s[1..]
       p "~~~~~~~~~~~~~~~~~#{code}~~~~~~~~~~~~~~~"
       flashcall_err = flashcall(phone_i, code)
-      return flashcall_err if flashcall_err
+      return ERRORS[:INTERNAL_ERROR] if flashcall_err
 
       save_code_err = add_code_to_cach(phone_i, code)
       return save_code_err if save_code_err
@@ -67,16 +67,16 @@ class Session < ApplicationRecord
     private
 
     def flashcall(phone, code)
-      # RestClient.get("http://#{EMAIL}:#{API_KEY}@gate.smsaero.ru/v2/flashcall/send?phone=#{phone}&code=#{code}") do |response, _request, _result|
-      #   case response.code
-      #   when 200
-      #     nil
-      #   when 400
-      #     ERRORS[:ALREADY_IN_QUEUE]
-      #   else
-      #     ERRORS[:INTERNAL_ERROR]
-      #   end
-      # end
+      RestClient.get("http://#{EMAIL}:#{API_KEY}@gate.smsaero.ru/v2/flashcall/send?phone=#{phone}&code=#{code}") do |response, _request, _result|
+        case response.code
+        when 200
+          nil
+        when 400
+          ERRORS[:ALREADY_IN_QUEUE]
+        else
+          ERRORS[:INTERNAL_ERROR]
+        end
+      end
     end
 
     def add_code_to_cach(phone, code)

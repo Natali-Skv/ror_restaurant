@@ -67,7 +67,7 @@ RSpec.describe Session, type: :model do
     expect(Session.checkcode(phone, code)).to eq([nil, Session::ERRORS[:INTERNAL_ERROR]])
   end
 
-  it 'should check invalid phone' do
+  it 'should return error when invalid phone' do
     too_short_phone = '79_015_020_45'
     true_code = '1234'
     expect(Session.checkcode(too_short_phone, true_code)).to eq([nil, Session::ERRORS[:INVALID_PHONE]])
@@ -75,9 +75,19 @@ RSpec.describe Session, type: :model do
 
   it 'should send code' do
     phone = '79_015_020_456'
-    code = '1234'
-    expect(Session).to receive(:flashcall).with(Session.phone_to_i(phone), code).and_return(nil)
-    expect(Session).to receive(:add_code_to_cach).with(Session.phone_to_i(phone), code).and_return(nil)
+    expect(Session).to receive(:flashcall).and_return(nil)
+    expect(Session).to receive(:add_code_to_cach).and_return(nil)
     expect(Session.sendcode(phone)).to be_nil
+  end
+
+  it 'should return internal server error if flashcode error occur' do
+    phone = '79_015_020_456'
+    expect(Session).to receive(:flashcall).and_return('error')
+    expect(Session.sendcode(phone)).to eq(Session::ERRORS[:INTERNAL_ERROR])
+  end
+
+  it 'should return internal server error if flashcode error occur' do
+    too_short_phone = '79_015_020_45'
+    expect(Session.sendcode(too_short_phone)).to eq(Session::ERRORS[:INVALID_PHONE])
   end
 end
