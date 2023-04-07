@@ -1,24 +1,10 @@
-# README
+# Сайт ресторана (меню, возможность оформления заказа)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Технологический стек:
+- Ruby on Rails
+- SQLite 
+- Memcached
 
-Things you may want to cover:
+## User flow [youtube](https://youtu.be/DhzISAL7Opc)
+[Screencast from 07.04.2023 18:02:03.webm](https://user-images.githubusercontent.com/71991158/230631746-9dfc8637-e09d-47f8-a791-2c5c64535c5b.webm)
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
